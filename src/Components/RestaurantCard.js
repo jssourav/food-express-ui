@@ -1,14 +1,9 @@
 import { IMG_CDN_URL } from "../utils/constants";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
-import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
