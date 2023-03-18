@@ -28,6 +28,7 @@ const useRestaurant = () => {
 
   useEffect(() => {
     setRestaurant(searchText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   return [searchText, filteredRestaurants, setSearchText];

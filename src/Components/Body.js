@@ -13,6 +13,7 @@ import Shimmer from "./Shimmer";
 const theme = createTheme({});
 
 export default function Body() {
+  // eslint-disable-next-line no-unused-vars
   const [searchText, restaurants, setRestaurants] = useRestaurant();
   console.log(restaurants);
   //   const isOnline = useOnline();
