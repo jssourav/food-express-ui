@@ -3,6 +3,7 @@ import "./App.css";
 import Dashboard from "./Components/admin/Dashboard";
 import SignIn from "./Components/admin/SignIn";
 import Body from "./Components/Body";
+import Home from "./Components/Home";
 
 const appRouter = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <>
-      <Dashboard />
+      <Home />
     </>
   );
 }
