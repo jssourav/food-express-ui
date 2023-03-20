@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./Components/admin/Dashboard";
-import SignIn from "./Components/admin/SignIn";
+import SignIn from "./Components/SignIn";
 import Body from "./Components/Body";
 import Home from "./Components/Home";
+import SignUp from "./Components/SignUp";
+import UserProfile from "./Components/UserProfile";
 
 const appRouter = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const appRouter = createBrowserRouter([
       {
         path: "signin",
         element: <SignIn />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "my-profile",
+        element: <UserProfile />,
       },
     ],
   },

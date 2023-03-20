@@ -18,6 +18,7 @@ const useRestaurant = () => {
     results = await results.json();
     results = results?.data?.cards[2]?.data?.data?.cards;
     results = results ?? [];
+    // console.log(results);
     setAllRestaurants(results); // ?. optional chaining
     setFilteredRestaurants(results);
   }

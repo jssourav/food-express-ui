@@ -15,7 +15,6 @@ const theme = createTheme({});
 export default function Body() {
   // eslint-disable-next-line no-unused-vars
   const [searchText, restaurants, setRestaurants] = useRestaurant();
-  console.log(restaurants);
   //   const isOnline = useOnline();
 
   // if (!isOnline) {
@@ -36,9 +35,9 @@ export default function Body() {
             pb: 6,
           }}
         ></Box>
-        <Container sx={{ py: 4 }}>
+        <Container sx={{ py: 4, maxWidth: "1300px !important" }}>
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={0} rowSpacing={{ xs: 2, sm: 4, md: 8 }}>
             {restaurants?.length === 0 ? (
               <h1>No Restaurants Available Currently!</h1>
             ) : (

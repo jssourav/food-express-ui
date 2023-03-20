@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
 
 const theme = createTheme({
   typography: {
@@ -28,34 +29,65 @@ const theme = createTheme({
       fontWeight: "400",
       fontSize: "12px",
     },
+    quickView: {
+      fontSize: "13px",
+      left: "20px",
+      right: "20px",
+      top: "33px",
+      position: "absolute",
+      textAlign: "center",
+      float: "none",
+      display: "block",
+      margin: " 0 auto",
+      color: "#5d8ed5",
+      textTransform: "uppercase",
+      fontWeight: 600,
+    },
   },
 });
 
 const RestaurantCard = ({
-  id,
   name,
   cuisines,
   cloudinaryImageId,
-  deliveryTime,
+  slaString,
   costForTwoString,
   avgRating,
 }) => {
+  const [showQuickView, setShowQuickView] = useState(false);
   return (
     <ThemeProvider theme={theme}>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={3}
+        sx={{
+          "&:hover": {
+            borderColor: "#d3d5df",
+            boxShadow: "0 4px 7px 0 rgba(218,220,230,.6)",
+          },
+          height: "426px",
+        }}
+      >
         <Card
+          elevation={0}
           sx={{
             display: "flex",
             flexDirection: "column",
+            width: "254px",
+            margin: "auto",
           }}
+          onMouseEnter={() => setShowQuickView(true)}
+          onMouseLeave={() => setShowQuickView(false)}
         >
           <CardMedia
             component="img"
             image={IMG_CDN_URL + cloudinaryImageId}
             alt="random"
-            sx={{ height: "221px" }}
+            sx={{ height: "160px", width: "254px" }}
           />
-          <CardContent sx={{ flexGrow: 1 }}>
+          <CardContent sx={{ flexGrow: 1, pl: 0, pr: 0 }}>
             <Typography
               gutterBottom
               variant="h5"
@@ -64,11 +96,29 @@ const RestaurantCard = ({
             >
               {name}
             </Typography>
-            <Typography sx={{ fontSize: 10 }}>
+            <Typography
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: "2",
+                WebkitBoxOrient: "vertical",
+                fontSize: 10,
+              }}
+            >
               {cuisines?.join(", ")}
             </Typography>
           </CardContent>
-          <CardActions sx={{ ml: 1, justifyContent: "space-between" }}>
+          <CardActions
+            sx={{
+              justifyContent: "space-between",
+              p: 0,
+              pl: 0,
+              pr: 0,
+              mr: 0,
+              ml: 0,
+            }}
+          >
             <Typography
               size="small"
               variant={
@@ -82,7 +132,7 @@ const RestaurantCard = ({
               &#x2022;
             </Typography>
             <Typography size="small" sx={{ fontSize: 12 }}>
-              {deliveryTime} MINS
+              {slaString}
             </Typography>
             <Typography size="small" sx={{ fontSize: 12 }}>
               &#x2022;
@@ -91,6 +141,22 @@ const RestaurantCard = ({
               {costForTwoString}
             </Typography>
           </CardActions>
+          {showQuickView && (
+            <CardContent
+              sx={{
+                position: "relative",
+                marginBottom: "36px !important",
+              }}
+            >
+              <Typography
+                size="small"
+                variant="quickView"
+                sx={{ paddingTop: "12px", borderTop: "1px solid #e9e9eb" }}
+              >
+                Quick View
+              </Typography>
+            </CardContent>
+          )}
         </Card>
       </Grid>
     </ThemeProvider>

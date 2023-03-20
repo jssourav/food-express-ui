@@ -8,8 +8,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Food Express
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -32,9 +32,7 @@ export default function Footer() {
       }}
     >
       <Container maxWidth="sm">
-        <Typography variant="body1">
-          My sticky footer can be found here.
-        </Typography>
+        <Typography variant="body1">Created by Sourav Nag</Typography>
         <Copyright />
       </Container>
     </Box>

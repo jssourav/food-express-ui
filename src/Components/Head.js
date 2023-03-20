@@ -18,8 +18,28 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import useRestaurant from "../utils/useRestaurant";
+import { Link as RouterLink } from "react-router-dom";
 const drawerWidth = 240;
-const navItems = ["Offers", "Help", "Sign In", "Cart"];
+// const navItems = ["Offers", "Help", "Sign In", "Cart"];
+
+const navItems = [
+  {
+    name: "Offers",
+    link: "#",
+  },
+  {
+    name: "Help",
+    link: "#",
+  },
+  {
+    name: "Sign In",
+    link: "/signin",
+  },
+  {
+    name: "Cart",
+    link: "#",
+  },
+];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -76,15 +96,24 @@ function Head(props) {
       onClick={handleDrawerToggle}
       sx={{ textAlign: "center", color: "#282c3f" }}
     >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Food Express
+      <Typography variant="h6" sx={{ my: 2 }} component={RouterLink} to="/">
+        <img
+          src="https://www.foodexpressonline.com/assets/user/img/logo2.png"
+          alt="logo"
+          width={200}
+        />
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        {navItems.map((item, index) => (
+          <ListItem
+            disablePadding
+            key={index}
+            to={item.link}
+            component={RouterLink}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} sx={{ color: "#282c3f" }} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -112,13 +141,18 @@ function Head(props) {
           </IconButton>
           <Typography
             variant="h6"
-            component="div"
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block", color: "#282c3f" },
             }}
+            component={RouterLink}
+            to="/"
           >
-            Food Express
+            <img
+              src="https://www.foodexpressonline.com/assets/user/img/logo2.png"
+              alt="logo"
+              width={200}
+            />
           </Typography>
           <Search sx={{ backgroundColor: "white" }}>
             <SearchIconWrapper>
@@ -133,9 +167,11 @@ function Head(props) {
             />
           </Search>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <Button
-                key={item}
+                to={item.link}
+                key={index}
+                component={RouterLink}
                 sx={{
                   color: "#282c3f",
                   padding: 4,
@@ -144,7 +180,7 @@ function Head(props) {
                   },
                 }}
               >
-                {item}
+                {item.name}
               </Button>
             ))}
           </Box>
