@@ -18,28 +18,10 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import useRestaurant from "../utils/useRestaurant";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setRedirectUrl, setLoggedIn } from "../store/authSlice";
 const drawerWidth = 240;
-// const navItems = ["Offers", "Help", "Sign In", "Cart"];
-
-const navItems = [
-  {
-    name: "Offers",
-    link: "#",
-  },
-  {
-    name: "Help",
-    link: "#",
-  },
-  {
-    name: "Sign In",
-    link: "/signin",
-  },
-  {
-    name: "Cart",
-    link: "#",
-  },
-];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,6 +66,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Head(props) {
+  const prevRoute = useLocation();
+  const isLoggedIn = useSelector((store) => store.auth.isAuth);
+  const dispatch = useDispatch();
+
+  const navItems = [
+    {
+      name: "Offers",
+      link: "#",
+    },
+    {
+      name: "Help",
+      link: "#",
+    },
+
+    {
+      name: "Cart",
+      link: "/cart",
+    },
+    {
+      name: isLoggedIn ? "My Profile" : "Sign In",
+      link: isLoggedIn ? "/my-profile" : "/signin",
+    },
+  ];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -117,14 +122,30 @@ function Head(props) {
             </ListItemButton>
           </ListItem>
         ))}
+        {isLoggedIn && (
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText
+                primary={"Logout"}
+                sx={{ color: "#282c3f" }}
+                onClick={() => dispatch(setLoggedIn(false))}
+              />
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+  // eslint-disable-next-line no-unused-vars
   const [searchText, restaurant, setRestaurant] = useRestaurant();
-  console.log(restaurant);
+
+  React.useEffect(() => {
+    dispatch(setRedirectUrl(prevRoute.pathname));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prevRoute.pathname]);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -183,6 +204,20 @@ function Head(props) {
                 {item.name}
               </Button>
             ))}
+            {isLoggedIn && (
+              <Button
+                sx={{
+                  color: "#282c3f",
+                  padding: 4,
+                  "&:hover": {
+                    color: "#f77419",
+                  },
+                }}
+                onClick={() => dispatch(setLoggedIn(false))}
+              >
+                Logout
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

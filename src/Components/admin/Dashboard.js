@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import { Link as RouterLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -31,8 +32,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link to="/signup" component={RouterLink} color="inherit">
+        Food Express
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

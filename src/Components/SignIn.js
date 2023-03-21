@@ -18,6 +18,8 @@ import * as yup from "yup";
 import { FOOD_EXPRESS_SERVICE_API } from "../utils/constants";
 import { CircularProgress } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedIn } from "../store/authSlice";
 
 const validationSchema = yup.object({
   email: yup
@@ -33,6 +35,9 @@ const validationSchema = yup.object({
 const theme = createTheme();
 
 export default function SignIn() {
+  const redirectUrl = useSelector((store) => store.auth.redirectTo);
+
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   const submitLoginForm = async (values) => {
@@ -48,17 +53,18 @@ export default function SignIn() {
       });
 
       if (!response.ok) {
-        console.log(response);
         throw new Error(`Error! status: ${response.status}`);
       }
       const result = await response.json();
-      console.log(result);
+
       localStorage.setItem("token", result?.user?.token);
       if (localStorage.getItem("token") === null) {
         alert("Login Not Successful");
+      } else {
+        dispatch(setLoggedIn(true));
+        navigate(redirectUrl);
+        setLoading(false);
       }
-      navigate("/my-profile");
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
