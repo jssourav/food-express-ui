@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setLoggedIn } from "../store/authSlice";
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setLoggedIn } from '../store/authSlice';
 const ProtectedRoute = (props) => {
   const isLoggedIn = useSelector((store) => store.auth.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const checkUserToken = () => {
-    const userToken = localStorage.getItem("token");
-    if (!userToken || userToken === "undefined") {
+    const userToken = localStorage.getItem('token');
+    if (!userToken || userToken === 'undefined') {
       dispatch(setLoggedIn(false));
-      return navigate("/signin");
+      return navigate('/signin');
     }
-    if (props?.user === "restaurant") {
+    if (props?.user === 'restaurant') {
       // TODO: API call to check if user is Restaurant Owner or not
     }
 
@@ -21,7 +22,6 @@ const ProtectedRoute = (props) => {
   };
   useEffect(() => {
     checkUserToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
   return <React.Fragment>{isLoggedIn ? props.children : null}</React.Fragment>;
 };

@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recha
 import Title from './Title';
 
 // Generate Sales Data
-function createData(time, amount) {
+function createData (time, amount) {
   return { time, amount };
 }
 
@@ -17,10 +17,10 @@ const data = [
   createData('15:00', 2000),
   createData('18:00', 2400),
   createData('21:00', 2400),
-  createData('24:00', undefined),
+  createData('24:00', undefined)
 ];
 
-export default function Chart() {
+export default function Chart () {
   const theme = useTheme();
 
   return (
@@ -33,7 +33,7 @@ export default function Chart() {
             top: 16,
             right: 16,
             bottom: 0,
-            left: 24,
+            left: 24
           }}
         >
           <XAxis
@@ -51,7 +51,7 @@ export default function Chart() {
               style={{
                 textAnchor: 'middle',
                 fill: theme.palette.text.primary,
-                ...theme.typography.body1,
+                ...theme.typography.body1
               }}
             >
               Sales ($)
